@@ -4,7 +4,75 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <h1></h1>
-  <p></p>
+  
+    Ruby is a dynamic, reflective, general-purpose object-oriented programming language that combines syntax inspired by Perl with Smalltalk-like features. It was also influenced by Eiffel and Lisp.[8] Ruby was first designed and developed in the mid-1990s by Yukihiro "Matz" Matsumoto in Japan.
+
+    Ruby supports multiple programming paradigms, including functional, object oriented and imperative. It also has a dynamic type system and automatic memory management; it is therefore similar in varying respects to Smalltalk, Python, Perl, Lisp, Dylan, and CLU.
+
+    The standard 1.8.7 implementation is written in C, as a single-pass interpreted language. Starting with the 1.9 branch, and continuing with the current 2.0 branch, YARV has been used, and will eventually supersede the slower Ruby MRI. The language specifications for Ruby were developed by the Open Standards Promotion Center of the Information-Technology Promotion Agency (a Japanese government agency) for submission to the Japanese Industrial Standards Committee and then to the International Organization for Standardization. It was accepted as a Japanese Industrial Standard (JIS X 3017) in 2011[9] and an international standard (ISO/IEC 30170) in 2012.[10] As of 2010, there are a number of complete or upcoming alternative implementations of Ruby, including YARV, JRuby, Rubinius, IronRuby, MacRuby (and its iOS counterpart, RubyMotion), mruby, HotRuby, Topaz and Opal. Each takes a different approach, with IronRuby, JRuby, MacRuby and Rubinius providing just-in-time compilation and MacRuby and mruby also providing ahead-of-time compilation.
+    Ruby was conceived on February 24, 1993 by Yukihiro Matsumoto who wished to create a new language that balanced functional programming with imperative programming.[11] Matsumoto has said, "I wanted a scripting language that was more powerful than Perl, and more object-oriented than Python. That's why I decided to design my own language."[12]
+
+    At a Google Tech Talk in 2008 Matsumoto further stated, "I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language."[
+    The name "Ruby" originated during an online chat session between Matsumoto and Keiju Ishitsuka on February 24, 1993, before any code had been written for the language.[14] Initially two names were proposed: "Coral" and "Ruby". Matsumoto chose the latter in a later email to Ishitsuka.[15] Matsumoto later noted a factor in choosing the name "Ruby" - it was the birthstone of one of his colleagues.[16][17]
+    
+    Already present at this stage of development were many of the features familiar in later releases of Ruby, including object-oriented design, classes with inheritance, mixins, iterators, closures, exception handling and garbage collection.[20]
+    Around 2005, interest in the Ruby language surged in tandem with Ruby on Rails, a popular web application framework written in Ruby. Rails is frequently credited with making Ruby "famous".[21]
+    
+    Ruby 2.0
+    Ruby 2.0 added several new features, including:
+
+        keyword arguments,functional
+        a new method – Module#prepend – for extending a class,
+        a new literal for creating an array of symbols,
+        new API for the lazy evaluation of Enumerables, and
+        a new convention of using #to_h to convert objects to Hashes.[
+        
+        Matsumoto has said that Ruby is designed for programmer productivity and fun, following the principles of good user interface design.[27] He stresses that systems design needs to emphasize human, rather than computer, needs:[28]
+
+            Often people, especially computer engineers, focus on the machines. They think, "By doing this, the machine will run faster. By doing this, the machine will run more effectively. By doing this, the machine will something something something." They are focusing on machines. But in fact we need to focus on humans, on how humans care about doing programming or operating the application of the machines. We are the masters. They are the slaves.
+
+        Ruby is said to follow the principle of least astonishment (POLA), meaning that the language should behave in such a way as to minimize confusion for experienced users. Matsumoto has said his primary design goal was to make a language which he himself enjoyed using, by minimizing programmer work and possible confusion. He has said that he had not applied the principle of least surprise to the design of Ruby,[28] but nevertheless the phrase has come to be closely associated with the Ruby programming language. The phrase has itself been a source of surprise, as novice users may take it to mean that Ruby's behaviors try to closely match behaviors familiar from other languages. In a May 2005 discussion on the newsgroup comp.lang.ruby, Matsumoto attempted to distance Ruby from POLA, explaining that because any design choice will be surprising to someone, he uses a personal standard in evaluating surprise. If that personal standard remains consistent, there would be few surprises for those familiar with the standard.[29]
+
+        Matsumoto defined it this way in an interview:[28]
+
+            Everyone has an individual background. Someone may come from Python, someone else may come from Perl, and they may be surprised by different aspects of the language. Then they come up to me and say, 'I was surprised by this feature of the language, so Ruby violates the principle of least surprise.' Wait. Wait. The principle of least surprise is not for you only. The principle of least surprise means principle of least my surprise. And it means the principle of least surprise after you learn Ruby very well. For example, I was a C++ programmer before I started designing Ruby. I programmed in C++ exclusively for two or three years. And after two years of C++ programming, it still surprises me.
+        
+            Ruby is object-oriented: every value is an object, including classes and instances of types that many other languages designate as primitives (such as integers, booleans, and "null"). Variables always hold references to objects. Every function is a method and methods are always called on an object. Methods defined at the top level scope become members of the Object class. Since this class is an ancestor of every other class, such methods can be called on any object. They are also visible in all scopes, effectively serving as "global" procedures. Ruby supports inheritance with dynamic dispatch, mixins and singleton methods (belonging to, and defined for, a single instance rather than being defined on the class). Though Ruby does not support multiple inheritance, classes can import modules as mixins.
+
+            Ruby has been described as a multi-paradigm programming language: it allows procedural programming (defining functions/variables outside classes makes them part of the root, 'self' Object), with object orientation (everything is an object) or functional programming (it has anonymous functions, closures, and continuations; statements all have values, and functions return the last evaluation). It has support for introspection, reflection and metaprogramming, as well as support for interpreter-based[36] threads. Ruby features dynamic typing, and supports parametric polymorphism.
+
+            According to the Ruby FAQ,[37] "If you like Perl, you will like Ruby and be right at home with its syntax. If you like Smalltalk, you will like Ruby and be right at home with its semantics. If you like Python, you may or may not be put off by the huge difference in design philosophy between Python and Ruby/Perl."
+            Syntax
+
+            The syntax of Ruby is broadly similar to that of Perl and Python. Class and method definitions are signaled by keywords. In contrast to Perl, variables are not obligatorily prefixed with a sigil. When used, the sigil changes the semantics of scope of the variable. One difference from C and Perl is that keywords are typically used to define logical code blocks, without braces (i.e., pair of { and }). For practical purposes there is no distinction between expressions and statements.[38] Line breaks are significant and taken as the end of a statement; a semicolon may be equivalently used. Unlike Python, indentation is not significant.
+
+            One of the differences of Ruby compared to Python and Perl is that Ruby keeps all of its instance variables completely private to the class and only exposes them through accessor methods (attr_writer, attr_reader, etc.). Unlike the "getter" and "setter" methods of other languages like C++ or Java, accessor methods in Ruby are created with a single line of code via metaprogramming. As invocation of these methods does not require the use of parentheses, it is trivial to change an instance variable into a full function, without modifying a single line of code or having to do any refactoring achieving similar functionality to C# and VB.NET property members.
+
+            Python's property descriptors are similar, but come with a tradeoff in the development process. If one begins in Python by using a publicly exposed instance variable, and later changes the implementation to use a private instance variable exposed through a property descriptor, code internal to the class may need to be adjusted to use the private variable rather than the public property. Ruby’s design forces all instance variables to be private, but also provides a simple way to declare set and get methods. This is in keeping with the idea that in Ruby, one never directly accesses the internal members of a class from outside of it; rather, one passes a message to the class and receives a response.
+
+            See the examples section for samples of code demonstrating Ruby syntax.
+            
+            
+            Camping
+            Cramp
+            Cuba
+            Fiasco
+            Grape
+            Mack
+            Maveric
+            Merb
+            Padrino
+            Pakyow
+            Rails
+            Ramaze
+            Renee
+            Scorched
+            ServerSide
+            Sinatra
+            Vintage
+  
+  
+  
+  
   </body>
 </html>
