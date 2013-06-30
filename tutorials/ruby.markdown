@@ -188,7 +188,7 @@ Given /^I am a student$/ do
 end  
 ```
 
-Run ```bundle exec cucumber``` and it will give you Run ```uninitialized constant Student```. We need another directory:  
+Run ```bundle exec cucumber``` and it will give you ```uninitialized constant Student```. We need another directory:  
 
 ```
 mkdir lib  
@@ -218,7 +218,7 @@ When /^I submit an assignment to my teacher$/ do
 end  
 ```
 
-Create ```lib/assigment.rb``` and paste in:  
+Create ```lib/assignment.rb``` and paste in:  
 
 ```
 class Assignment  
@@ -262,7 +262,7 @@ end
 
 We added ```def assignment_for_student(student)``` so you could avoid running Cucumber again and figuring out we don't have assignments yet either.  
 
-**Now we're all ready do touch some rspec.**  
+**Now we're all ready to touch some rspec.**  
 
 ```
 mkdir spec  
