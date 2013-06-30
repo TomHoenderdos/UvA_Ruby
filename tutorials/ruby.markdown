@@ -351,20 +351,151 @@ Given /^I have a student$/ do
  @assignment = Assignment.new  
 end
 
-Given /^They have submitted an assignment$/ do
-  @teacher.submit_assigment(@student, @assignment)
+Given /^They have submitted an assignment$/ do  
+  @teacher.submit_assigment(@student, @assignment)  
 end
 
-When /^I grade the assignment$/ do
-  @teacher.record_grade(assignment, :a)
-end
+When /^I grade the assignment$/ do  
+  @teacher.record_grade(@assignment, 95)  
+end  
 
-Then /^the assignment has a grade$/ do
-end
-
+Then /^the assignment has a grade$/ do  
+end  
 ```
 
+Open ```lib/teacher.rb``` and add  
 
+```
+def record_grade(student, grade)  
+end  
+```
+
+Open ```spec/teacher_spec.rb``` and add  
+
+```
+describe "should record a grade" do  
+  it "can find an assignment" do  
+    student_a, assignment_a = stub(:student_a), stub(:assignment_a)  
+    student_b, assignment_b = stub(:student_b), stub(:assignment_a)  
+    subject.submit_assignment(student_a, assignment_a)  
+    subject.submit_assignment(student_b, assignment_b)  
+    subject.find_assignment(assignment_a).should eq(assignment_a)  
+  end  
+end  
+```
+
+Running the test you'll get an ```undefined method``` for ```find_assignment```. Open ```lib/teacher.rb``` and add  
+
+```
+def find_assignment(assignment)  
+  key = @assignment.select{|k,v| v == assignment}.first.first  
+  @assignment[key]  
+end  
+```
+
+We then run ```bundle exec cucumber --tags @wip``` and start working on our ```Then /^the assignment has a grade$/```. Open ```teacher.rb``` and change
+
+```
+def record_grade(student, grade)  
+end  
+```
+
+in
+
+```
+def record_grade(student, grade)  
+  assignment = @assignments[student]
+  assignment.grade = grade
+  assignments[student] = assignment
+end  
+```
+
+And get rid off:  
+
+```
+def find_assignment(assignment)  
+  key = @assignment.select{|k,v| v == assignment}.first.first  
+  @assignment[key]  
+end  
+```
+
+Open ```teacher_spec.rb``` and replace  
+
+```
+it "can find an assignment" do  
+  student_a, assignment_a = stub(:student_a), stub(:assignment_a)  
+  student_b, assignment_b = stub(:student_b), stub(:assignment_a)  
+  subject.submit_assignment(student_a, assignment_a)  
+  subject.submit_assignment(student_b, assignment_b)  
+  subject.find_assignment(assignment_a).should eq(assignment_a)  
+end  
+```
+
+with
+```  
+it "should record the grade" do  
+  student = stub  
+  assignment = mock  
+  assignment.should_receive(:grade=).with(95)  
+  subject.submit_assignment(student, assignment)  
+  subject.record_grade(student, 95)   
+end  
+```
+
+When we run ```bundle exec cucumber --tags @wip``` it won't actually show us the grade, we get an ```undefined method``` for ```grade=```. Let's fix that. 
+Open ```features/step_definitions/teacher_grade_assignment.rb``` and change 
+
+```
+When /^I grade the assignment$/ do  
+  @teacher.record_grade(@assignment, 95)  
+end  
+```
+
+in 
+
+```
+When /^I grade the assignment$/ do  
+  @teacher.record_grade(@student, 95)  
+end  
+```
+
+Create ```assignment_spec.rb``` in your specs folder and write: 
+
+```
+require_relative "../lib/assignment"  
+
+describe Assignment do  
+  it "should store a grade" do  
+    subject.grade = 60  
+    subject.grade.should eq(60)  
+  end  
+end  
+```
+
+And finally add to ```assignment.rb```  
+
+```
+class Assignment
+  attr_accessor :grade
+end
+```
+
+Open ```features/step_definitions/teacher_grade_assignment.rb``` and change 
+
+```
+Then /^the assignment has a grade$/ do  
+end  
+```
+
+in
+
+```
+Then /^the assignment has a grade$/ do 
+  @teacher.assignment_for_student(@student).grade.should eq(95)  
+end  
+```
+
+Now when you run ```bundle exec cucumber``` and ```rspec spec```, you should be all green! 
 
 
 [1]: http://rubyinstaller.org/
