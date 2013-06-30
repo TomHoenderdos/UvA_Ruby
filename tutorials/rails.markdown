@@ -189,7 +189,9 @@ under the line
 ```gem 'carrierwave'```
 
 in the Terminal/Command Prompt run  
-```bundle```
+```
+bundle
+```
 
 and then  
 ```
