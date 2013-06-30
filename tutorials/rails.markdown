@@ -55,48 +55,51 @@ CTRL-C to exit the server in Terminal/Command Prompt.
 
 **Rails’ scaffolds generate a starting point that allows us to list, add, remove, edit, and view things.** 
 
-rails generate scaffold attendee name:string twitter_handle:string bio:text address:text picture:string
-rake db:migrate
+rails generate scaffold attendee name:string twitter_handle:string bio:text address:text picture:string  
+
+rake db:migrate  
+
 rails s
 
-**We’ll use Twitter’s Bootstrap project to give us nicer default styles really easily.** 
+**We’ll use Twitter’s Bootstrap project to give us nicer default styles really easily.**  
+
 Open app/views/layouts/application.html.erb and add on top of
 
-<pre><code><%= stylesheet_link_tag “application” %></pre></code>
+<pre><%= stylesheet_link_tag “application” %></pre>
 
 the line
 
-<pre><code><link rel="stylesheet" href="http://railsgirls.com/assets/bootstrap.css"></pre></code>
+<pre><link rel="stylesheet" href="http://railsgirls.com/assets/bootstrap.css"></pre>
 
 and swap
 
-<pre><code><%= yield %></pre></code>
+<pre><%= yield %></pre>
 
 for
 	
-<pre><code><div class="container"><%= yield %></div></pre></code>
+<pre><div class="container"><%= yield %></div></pre>
 
 Let’s also add topbar and footer to the layout and style those and the 
-attendees table. To the application.html.erb under <pre><code><body></pre></code> add:
+attendees table. To the application.html.erb under <pre><body></pre> add:
 
-<pre><code><div class="navbar navbar-fixed-top">
+<pre><div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container"><a class="brand" href=“/”>The mapp</a><ul class="nav">
               <li class="active"><a href="/attendees">attendees</a></li>
             </ul>
         </div>
     </div>
-</div></pre></code>
+</div></pre><
 
-before <pre><code></body></pre></code> add:
+before <pre></body></pre> add:
 
-<pre><code><footer>
+<pre><footer>
     <div class=“container”>5 talen in 5 dagen</div>
-</footer></pre></code>
+</footer></pre>
 
 Open app/assets/stylesheets/application.css and add to the bottom:
 
-<pre><code>#logo {
+<pre>#logo {
     font-size: 20px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     float: left;
@@ -107,119 +110,119 @@ footer { margin-top: 100px; }
 table, td, th { vertical-align: middle !important; border: none !important; }
 th { border-bottom: 1px solid #DDD !important; }
 td.picture { width: 140px; }
-td.picture img { width: 140px; }</pre></code>
+td.picture img { width: 140px; }</pre>
 
 **We need to install additional library to add image processing.** 
 Open Gemfile in the project and add:
 
-<pre><code>gem 'carrierwave'</pre></code>
+<pre>gem 'carrierwave'</pre>
 
 under the line:
 
-<pre><code>gem 'sqlite3'</pre></code>
+<pre>gem 'sqlite3'</pre>
 
 In the Terminal/Command Prompt run bundle. Restart the Rails server process in the Terminal. Then run: 
 rails generate uploader Picture
 
 Open app/models/attendee.rb and add:
 
-<pre><code>mount_uploader :picture, PictureUploader</pre></code>
+<pre>mount_uploader :picture, PictureUploader</pre>
 
 under the line:
-<pre><code>class Attendee < ActiveRecord::Base</pre></code>
+<pre>class Attendee < ActiveRecord::Base</pre>
 
 Open app/views/attendees/_form.html.erb and change
 
-<pre><code><%= f.text_field :picture %></pre></code>
+<pre><%= f.text_field :picture %></pre>
 
 to
 
-<pre><code><%= f.file_field :picture %></pre></code>
+<pre><%= f.file_field :picture %></pre>
 
 and
 
-<pre><code><%= form_for(@attendee) do |f| %></pre></code>
+<pre><%= form_for(@attendee) do |f| %></pre>
 
 to
 
-<pre><code><%= form_for(@attendee, :html => {:multipart => true}) do |f| %></pre></code>
+<pre><%= form_for(@attendee, :html => {:multipart => true}) do |f| %></pre>
 
 The view doesn’t look nice, it only shows a path to the file, so let’s fix it.
 Open app/views/attendees/show.html.erb and change
 
-<pre><code><%= @attendee.picture %></pre></code>
+<pre><%= @attendee.picture %></pre>
 
 to
 
-<pre><code><%= image_tag(@attendee.picture_url, :width => 600) if @attendee.picture.present? %></pre></code>
+<pre><%= image_tag(@attendee.picture_url, :width => 600) if @attendee.picture.present? %></pre>
 
 **If you try to open http://localhost:3000 it still shows the default page.** 
 
-On OS X and Linux, in the Terminal run:
+On OS X and Linux, in the Terminal run:  
 
-rm public/index.html
+rm public/index.html  
 
-In Windows, in the Command Prompt run:
+In Windows, in the Command Prompt run:  
 
-del public\index.html
+del public\index.html  
 
 Then open config/routes.rb and add the following after the first line:
-<pre><code>root :to => redirect("/attendees")</pre></code>
+<pre>root :to => redirect("/attendees")</pre>
 
 **Adding Geolocator and Google Maps**
 
-Open Gemfile in the project and add
+Open Gemfile in the project and add  
 
-<pre><code>gem 'geocoder'</pre></code>
+<pre>gem 'geocoder'</pre>  
 
-and
+and  
 
-<pre><code>gem 'gmaps4rails'</pre></code>
+<pre>gem 'gmaps4rails'</pre>  
 
-under the line
+under the line  
 
-<pre><code>gem 'carrierwave'</pre></code>
+<pre>gem 'carrierwave'</pre>  
 
-in the Terminal/Command Prompt run
+in the Terminal/Command Prompt run  
 bundle
 
-and then
+and then  
 
 rails generate migration AddLatitudeAndLongitudeToAttendee latitude:float longitude:float
 rake db:migrate
 
-Open app/models/attendee.rb and add
+Open app/models/attendee.rb and add  
 
-<pre><code>geocoded_by :address</pre></code>
-<pre><code>after_validation :geocode</pre></code>
+<pre><geocoded_by :address</pre>
+<pre>after_validation :geocode</pre>  
 
-after
+after  
 
-<pre><code>mount_uploader :picture, PictureUploader</pre></code>
+<pre>mount_uploader :picture, PictureUploader</pre>  
 
-In the Terminal/Command Prompt run
+In the Terminal/Command Prompt run  
 
-<pre><code>rails generate gmaps4rails:install</pre></code>
+<pre>rails generate gmaps4rails:install</pre>  
 
-Go back to app/models/attendee.rb and add
-<pre><code>acts_as_gmappable :process_geocoding => false</pre></code>
+Go back to app/models/attendee.rb and add  
+<pre>acts_as_gmappable :process_geocoding => false</pre>  
 
-after
-<pre><code>after_validation :geocode</pre></code>
+after  
+<pre>after_validation :geocode</pre>  
 
 Open app/controllers/attendees_controller.rb and add
 
-<pre><code>@pins = @attendees.to_gmaps4rails</pre></code>
+<pre>@pins = @attendees.to_gmaps4rails</pre>  
 
-in the index method, after
+in the index method, after  
 
-<pre><code>@attendees = Attendee.all</pre></code>
+<pre>@attendees = Attendee.all</pre>  
 
-Open app/views/attendees/index.html.erb and add
+Open app/views/attendees/index.html.erb and add  
 
-<pre><code><br/>
-<%= gmaps4rails(@pins) %>
-<%= yield :scripts %></pre></code>
+<pre><br/>  
+<%= gmaps4rails(@pins) %>  
+<%= yield :scripts %></pre>
 
 after the table.
 
@@ -230,25 +233,24 @@ after the table.
 heroku login
 Press enter at the prompt to upload your existing ssh key or create a new one, used for pushing code later on.
 
-<pre><code>Add the following in the Gemfile:
+<pre>Add the following in the Gemfile:
 group :development do
   gem ‘sqlite3’
-end</pre></code>
+end</pre>
 
-Run:
-bundle install --without production
+Run:  
+bundle install --without production  
 
-Version control:
-git init
-git add .
-git commit -m "initial commit"
+Version control:  
+git init  
+git add .  
+git commit -m "initial commit"  
 
-App creation:
-heroku create
-git push heroku master
-heroku run rake db:migrate
+App creation:  
+heroku create  
+git push heroku master  
+heroku run rake db:migrate  
 heroku open
-
 
 
 
@@ -257,3 +259,6 @@ heroku open
 [3]: http://railsinstaller.s3.amazonaws.com/RailsInstaller-1.0.4-osx-10.6.app.tgz
 [4]: https://id.heroku.com/signup/devcenter
 [5]: https://toolbelt.heroku.com/
+
+Rails 4:   
+add <%= stylesheet_link_tag 'gmaps4rails' %> to your application layout 
