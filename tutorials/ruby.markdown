@@ -12,7 +12,7 @@ sudo apt-get install ruby1.9.1
 
 Create a text file called hello-world.rb containing the following code:  
 
-<pre>puts ‘Hello world’</pre>  
+```puts ‘Hello world’```
 
 Now run it:  
 
@@ -24,7 +24,7 @@ a text file. This is called a one-liner:
 Ruby -e "puts 'Hello world'"  
 
 You can run this code with irb, but the output will look slightly different. puts will print out "Hello world”, but irb will also print out the return 
-value of puts – which is <pre>nil</pre>.  
+value of puts – which is ```nil```.  
 
 irb  
 >> puts “Hello world”  
@@ -35,90 +35,86 @@ Hello world
 
 Let’s say you have a class Person: 
 
-<pre>class Person  
-end</pre>  
+```class Person  
+end```  
 
 person = Person.new  
 person.name # => no method error  
 
 Obviously we never defined method name. Let’s do that: 
 
-class Person
-  def name
-    @name # simply returning an instance variable @name
-  end
-end
+```class Person  
+  def name  
+    @name # simply returning an instance variable @name  
+  end  
+end``` 
 
-person = Person.new
-person.name # => nil
-person.name = "Dennis" # => no method error
+person = Person.new  
+person.name # => nil  
+person.name = "Dennis" # => no method error  
 
 We can read the name, but that doesn’t mean we can assign the name. Those are two different methods. Former called reader and latter called writer. We didn’t create the writer yet so let’s do that. 
 
-class Person
-  def name
-    @name
-  end
+```class Person  
+  def name  
+    @name  
+  end  
 
-  def name=(str)
-    @name = str
-  end
-end
+  def name=(str)  
+    @name = str  
+  end  
+end```  
 
-person = Person.new
-person.name = 'Dennis'
-person.name # => "Dennis"
+person = Person.new  
+person.name = 'Dennis'  
+person.name # => "Dennis"  
 
-Awesome. Now we can write and read instance variable @name using 
-reader and writer methods. But why waste time writing these methods 
-every time? 
+Awesome. Now we can write and read instance variable @name using reader and writer methods. But why waste time writing these methods every time?  
 
-class Person  
+```class Person  
   attr_reader :name  
-  attr_writer :name
-end
+  attr_writer :name  
+end``` 
 
-Even this can get repetitive. When you want both reader and writer, 
-just use accessor: 
+Even this can get repetitive. When you want both reader and writer, just use accessor:  
 
-class Person
-  attr_accessor :name
-end
+```class Person  
+  attr_accessor :name  
+end```  
 
-person = Person.new
-person.name = “Dennis”
-person.name # => “Dennis”
+person = Person.new  
+person.name = "Dennis"  
+person.name # => "Dennis"  
 
-class Person
-  attr_accessor :name
+```class Person  
+  attr_accessor :name  
 
-  def greeting
-    “Hello #{@name}”
-  end
-end
+  def greeting  
+    “Hello #{@name}”  
+  end  
+end```  
 
-person = Person.new
-person.name = “Dennis”
-person.greeting # => “Hello Dennis”
+person = Person.new  
+person.name = "Dennis"  
+person.greeting # => "Hello Dennis"  
 
-
-Starting a new Ruby project:
-cd ..
-mkdir Ruby_uva
-bundle gem Ruby_uva
-cd Ruby_uva
-git commit -m “Empty project”
-rspec --init
+**Starting a new Ruby project:**
+cd ..  
+mkdir Ruby_uva  
+bundle gem Ruby_uva  
+cd Ruby_uva  
+git commit -m "Empty project"  
+rspec --init  
 
 ####BDD
 
-Let’s create that Gemfile: 
+Let’s create that Gemfile:  
 
-source “http://rubygems.org”
+```source "http://rubygems.org"  
 
-gem “rack”
-gem “cucumber”
-gem “rspec”
+gem "rack"  
+gem "cucumber”  
+gem "rspec"```  
 
 Run bundle
 
