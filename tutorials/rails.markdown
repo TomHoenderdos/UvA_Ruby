@@ -16,28 +16,28 @@ It will open a readme file with ‘Rails Installer OS X’ at the top. Please ig
 
 #####Linux:
 For Ubuntu:  
-bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-ubuntu.sh)
+```bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-ubuntu.sh)```
 
 For Fedora:  
-bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-fedora.sh)
+```bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-fedora.sh)```
 
 ####Or:
 
 ... if you already have Ruby installed:   
-ruby -v  
+```ruby -v  ```
 
 To install Rails, use the gem install command provided by RubyGems:  
-gem install rails  
+```gem install rails  ```
 
 To verify that you have everything installed correctly:  
-rails --version  
+```rails --version  ```
 
 If it says something like “Rails 4.0.0”, you are ready to continue.
 
 ####Creating a Map
 
 **Starting a new Rails project:**  
-
+<pre>
 mkdir projects  
 
 cd projects  
@@ -47,59 +47,63 @@ rails new mapp
 cd mapp  
 
 rails s  
+</pre>
 
-
-Open http://localhost:3000 in browser.  
+Open ```http://localhost:3000``` in browser.  
 CTRL-C to exit the server in Terminal/Command Prompt.  
 
 
 **Rails’ scaffolds generate a starting point that allows us to list, add, remove, edit, and view things.** 
 
-rails generate scaffold attendee name:string twitter_handle:string bio:text address:text picture:string  
+```rails generate scaffold attendee name:string twitter_handle:string bio:text address:text picture:string  ```
 
-rake db:migrate  
+```rake db:migrate ```
 
-rails s
+```rails s```
 
 **We’ll use Twitter’s Bootstrap project to give us nicer default styles really easily.**  
 
-Open app/views/layouts/application.html.erb and add on top of
+Open ```app/views/layouts/application.html.erb``` and add on top of
 
-<pre><%= stylesheet_link_tag “application” %></pre>
+```<%= stylesheet_link_tag “application” %>```
 
 the line
 
-<pre><link rel="stylesheet" href="http://railsgirls.com/assets/bootstrap.css"></pre>
+```<link rel="stylesheet" href="http://railsgirls.com/assets/bootstrap.css">```
 
 and swap
 
-<pre><%= yield %></pre>
+```<%= yield %>```
 
 for
 	
-<pre><div class="container"><%= yield %></div></pre>
+```<div class="container"><%= yield %></div>```
 
 Let’s also add topbar and footer to the layout and style those and the 
-attendees table. To the application.html.erb under <pre><body></pre> add:
+attendees table. To the application.html.erb under ```<body>``` add:
 
-<pre><div class="navbar navbar-fixed-top">
+```
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container"><a class="brand" href=“/”>The mapp</a><ul class="nav">
               <li class="active"><a href="/attendees">attendees</a></li>
             </ul>
         </div>
     </div>
-</div></pre><
+</div>
+```
 
-before <pre></body></pre> add:
+before ```</body>``` add:
 
-<pre><footer>
+```
+<footer>
     <div class=“container”>5 talen in 5 dagen</div>
-</footer></pre>
+</footer>
+```
 
-Open app/assets/stylesheets/application.css and add to the bottom:
-
-<pre>#logo {
+Open ```app/assets/stylesheets/application.css``` and add to the bottom:
+```
+#logo {
     font-size: 20px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     float: left;
@@ -110,119 +114,123 @@ footer { margin-top: 100px; }
 table, td, th { vertical-align: middle !important; border: none !important; }
 th { border-bottom: 1px solid #DDD !important; }
 td.picture { width: 140px; }
-td.picture img { width: 140px; }</pre>
+td.picture img { width: 140px; }
+```
 
 **We need to install additional library to add image processing.** 
 Open Gemfile in the project and add:
 
-<pre>gem 'carrierwave'</pre>
+```gem 'carrierwave'```
 
 under the line:
 
-<pre>gem 'sqlite3'</pre>
+```gem 'sqlite3'```
 
 In the Terminal/Command Prompt run bundle. Restart the Rails server process in the Terminal. Then run: 
 rails generate uploader Picture
 
-Open app/models/attendee.rb and add:
+Open ```app/models/attendee.rb``` and add:
 
-<pre>mount_uploader :picture, PictureUploader</pre>
+```mount_uploader :picture, PictureUploader```
 
 under the line:
-<pre>class Attendee < ActiveRecord::Base</pre>
+```class Attendee < ActiveRecord::Base```
 
-Open app/views/attendees/_form.html.erb and change
+Open ```app/views/attendees/_form.html.erb``` and change
 
-<pre><%= f.text_field :picture %></pre>
+```<%= f.text_field :picture %>```
 
 to
 
-<pre><%= f.file_field :picture %></pre>
+```<%= f.file_field :picture %>```
 
 and
 
-<pre><%= form_for(@attendee) do |f| %></pre>
+```<%= form_for(@attendee) do |f| %>```
 
 to
 
-<pre><%= form_for(@attendee, :html => {:multipart => true}) do |f| %></pre>
+```<%= form_for(@attendee, :html => {:multipart => true}) do |f| %>```
 
 The view doesn’t look nice, it only shows a path to the file, so let’s fix it.
 Open app/views/attendees/show.html.erb and change
 
-<pre><%= @attendee.picture %></pre>
+```<%= @attendee.picture %>```
 
 to
 
-<pre><%= image_tag(@attendee.picture_url, :width => 600) if @attendee.picture.present? %></pre>
+```<%= image_tag(@attendee.picture_url, :width => 600) if @attendee.picture.present? %>```
 
 **If you try to open http://localhost:3000 it still shows the default page.** 
 
 On OS X and Linux, in the Terminal run:  
 
-rm public/index.html  
+```rm public/index.html```
 
 In Windows, in the Command Prompt run:  
 
-del public\index.html  
+```del public\index.html```
 
-Then open config/routes.rb and add the following after the first line:
-<pre>root :to => redirect("/attendees")</pre>
+Then open ```config/routes.rb``` and add the following after the first line:
+```root :to => redirect("/attendees")```
 
 **Adding Geolocator and Google Maps**
 
 Open Gemfile in the project and add  
 
-<pre>gem 'geocoder'</pre>  
+```gem 'geocoder'```
 
 and  
 
-<pre>gem 'gmaps4rails'</pre>  
+```gem 'gmaps4rails'```
 
 under the line  
 
-<pre>gem 'carrierwave'</pre>  
+```gem 'carrierwave'```
 
 in the Terminal/Command Prompt run  
-bundle
+```bundle```
 
 and then  
-
+```
 rails generate migration AddLatitudeAndLongitudeToAttendee latitude:float longitude:float
 rake db:migrate
+```
+Open ```app/models/attendee.rb``` and add  
 
-Open app/models/attendee.rb and add  
-
-<pre><geocoded_by :address</pre>
-<pre>after_validation :geocode</pre>  
-
+```
+geocoded_by :address
+after_validation :geocode
+```
 after  
 
-<pre>mount_uploader :picture, PictureUploader</pre>  
+```mount_uploader :picture, PictureUploader``` 
 
 In the Terminal/Command Prompt run  
 
-<pre>rails generate gmaps4rails:install</pre>  
+```rails generate gmaps4rails:install```
 
-Go back to app/models/attendee.rb and add  
-<pre>acts_as_gmappable :process_geocoding => false</pre>  
+Go back to ```app/models/attendee.rb``` and add  
+```acts_as_gmappable :process_geocoding => false```
 
 after  
-<pre>after_validation :geocode</pre>  
+```after_validation :geocode```
 
-Open app/controllers/attendees_controller.rb and add
+Open ```app/controllers/attendees_controller.rb``` and add
 
-<pre>@pins = @attendees.to_gmaps4rails</pre>  
+```@pins = @attendees.to_gmaps4rails```
 
 in the index method, after  
 
-<pre>@attendees = Attendee.all</pre>  
+```@attendees = Attendee.all```
 
-Open app/views/attendees/index.html.erb and add  
+Open ```app/views/attendees/index.html.erb``` and add  
 
-<pre><br/>  
+```
+<br/>  
 <%= gmaps4rails(@pins) %>  
-<%= yield :scripts %></pre>
+<%= yield :scripts %>
+```
 
 after the table.
 
@@ -233,25 +241,29 @@ after the table.
 heroku login
 Press enter at the prompt to upload your existing ssh key or create a new one, used for pushing code later on.
 
-<pre>Add the following in the Gemfile:
+```
+Add the following in the Gemfile:
 group :development do
   gem ‘sqlite3’
-end</pre>
+end
+```
 
 Run:  
-bundle install --without production  
+```bundle install --without production  ```
 
 Version control:  
+```
 git init  
 git add .  
 git commit -m "initial commit"  
-
+```
 App creation:  
+```
 heroku create  
 git push heroku master  
 heroku run rake db:migrate  
 heroku open
-
+```
 
 
 [1]: http://rubyforge.org/frs/download.php/76862/railsinstaller-2.2.1.exe
