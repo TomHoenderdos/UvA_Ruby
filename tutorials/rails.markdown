@@ -2,49 +2,54 @@
 
 #####Windows:
 
-Download [RailsInstaller][1] and run it. Click through the installer using the default options.
+Download [RailsInstaller][1] and run it. Click through the installer using the default options.  
 Installation of Git and SSH-keys is required if you want to put your app online with Heroku.
 
 #####OS X:
 
-Download the RailsInstaller for your version of OS X:
-[10.7 and 10.8][2] 
-[10.6][3] 
+Download the RailsInstaller for your version of OS X:  
+[10.7 and 10.8][2]  
+[10.6][3]  
 
-Double click the downloaded file and it will unpack it into the current 
-directory. It will open a readme file with ‘Rails Installer OS X’ at the top. Please ignore the instructions in this file.
+Double click the downloaded file and it will unpack it into the current directory.  
+It will open a readme file with ‘Rails Installer OS X’ at the top. Please ignore the instructions in this file.
 
 #####Linux:
-For Ubuntu:
+For Ubuntu:  
 bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-ubuntu.sh)
 
-For Fedora:
+For Fedora:  
 bash < <(curl -s https://raw.github.com/railsgirls/installation-scripts/master/rails-install-fedora.sh)
 
 ####Or:
 
-... if you already have Ruby installed:
-ruby -v 
+... if you already have Ruby installed:   
+ruby -v  
 
-To install Rails, use the gem install command provided by RubyGems:
-gem install rails
+To install Rails, use the gem install command provided by RubyGems:  
+gem install rails  
 
-To verify that you have everything installed correctly:
-
-rails --version
+To verify that you have everything installed correctly:  
+rails --version  
 
 If it says something like “Rails 4.0.0”, you are ready to continue.
 
 ####Creating a Map
 
-**Starting a new Rails project:**
-mkdir projects
-cd projects
-rails new mapp
-cd mapp
-rails s
+**Starting a new Rails project:**  
 
-Open http://localhost:3000 in browser.
+mkdir projects  
+
+cd projects  
+
+rails new mapp  
+
+cd mapp  
+
+rails s  
+
+
+Open http://localhost:3000 in browser.  
 CTRL-C to exit the server in Terminal/Command Prompt.  
 
 
