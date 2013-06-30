@@ -275,4 +275,4 @@ heroku open
 [5]: https://toolbelt.heroku.com/
 
 Rails 4:   
-add <%= stylesheet_link_tag 'gmaps4rails' %> to your application layout 
+add ```<%= stylesheet_link_tag 'gmaps4rails' %>``` to your application layout 
