@@ -158,7 +158,7 @@ So I can prove my knowledge
 
 Scenario: Student can submit an assignment  
 Given I am a student  
-When I submit an assignment to my teacher  
+When I submit an assigment to my teacher  
 Then my teacher should have my assignment  
 ``` 
 
@@ -406,7 +406,7 @@ in
 def record_grade(student, grade)  
   assignment = @assignments[student]
   assignment.grade = grade
-  assignments[student] = assignment
+  @assignments[student] = assignment
 end  
 ```
 
@@ -440,6 +440,29 @@ it "should record the grade" do
   subject.submit_assignment(student, assignment)  
   subject.record_grade(student, 95)   
 end  
+```
+
+The file should now look like this:
+```
+require_relative "../lib/teacher"  
+require "rspec"  
+
+describe Teacher do  
+  	it "should store assignments" do  
+    	student = stub  
+    	assignment = stub  
+    	subject.submit_assignment(student, assignment)  
+    	subject.assignment_for_student(student).should eq(assignment)  
+  	end  
+
+  	it "should record the grade" do  
+  		student = stub  
+  		assignment = mock  
+  		assignment.should_receive(:grade=).with(95) 
+  		subject.submit_assignment(student, assignment)  
+  		subject.record_grade(student, 95)   
+	end
+end
 ```
 
 When we run ```bundle exec cucumber --tags @wip``` it won't actually show us the grade, we get an ```undefined method``` for ```grade=```. Let's fix that. 
