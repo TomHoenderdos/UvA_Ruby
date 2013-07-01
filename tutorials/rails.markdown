@@ -126,8 +126,8 @@ under the line:
 
 ```gem 'sqlite3'```
 
-In the Terminal/Command Prompt run bundle. Restart the Rails server process in the Terminal. Then run: 
-rails generate uploader Picture
+In the Terminal/Command Prompt run ```bundle```. Restart the Rails server process in the Terminal. Then run: 
+```rails generate uploader Picture```  
 
 Open ```app/models/attendee.rb``` and add:
 
