@@ -214,7 +214,7 @@ In ```students_assignment_steps.rb``` fill in your ```When```:
 ```
 When /^I submit an assignment to my teacher$/ do  
   @assignment = Assignment.new  
-  @teacher.submit_assignment(@student, @assignment)  
+  @student.submit_assignment(@teacher, @assignment)  
 end  
 ```
 
