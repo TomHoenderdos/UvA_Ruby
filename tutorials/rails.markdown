@@ -65,7 +65,7 @@ CTRL-C to exit the server in Terminal/Command Prompt.
 
 Open ```app/views/layouts/application.html.erb``` and add on top of
 
-```<%= stylesheet_link_tag “application” %>```
+```<%= stylesheet_link_tag "application" %>```
 
 the line
 
@@ -238,16 +238,16 @@ after the table.
 
 ####Putting it online with Heroku:
 
-[Sign up for a Heroku account][4], if you don’t already have one.
-[Install the Heroku Toolbelt][5] for your development operating system.
-heroku login
-Press enter at the prompt to upload your existing ssh key or create a new one, used for pushing code later on.
+[Sign up for a Heroku account][4], if you don’t already have one.  
+[Install the Heroku Toolbelt][5] for your development operating system.  
+```heroku login```  
+Press enter at the prompt to upload your existing ssh key or [create a new one][6], used for pushing code later on.  
 
+Add the following in the Gemfile:  
 ```
-Add the following in the Gemfile:
-group :development do
-  gem ‘sqlite3’
-end
+group :development do  
+  gem 'sqlite3'  
+end  
 ```
 
 Run:  
@@ -273,6 +273,7 @@ heroku open
 [3]: http://railsinstaller.s3.amazonaws.com/RailsInstaller-1.0.4-osx-10.6.app.tgz
 [4]: https://id.heroku.com/signup/devcenter
 [5]: https://toolbelt.heroku.com/
+[6]: https://devcenter.heroku.com/articles/keys
 
 Rails 4:   
 add ```<%= stylesheet_link_tag 'gmaps4rails' %>``` to your application layout 
