@@ -133,9 +133,9 @@ Let’s create that Gemfile:
 ```
 source "http://rubygems.org"  
 
-gem 'rack'  
-gem 'cucumber'  
-gem 'rspec'
+gem "rack"  
+gem "cucumber”  
+gem "rspec"
 ```  
 
 Run ```bundle```  or ```bundle install```  
@@ -330,7 +330,7 @@ Feature: Teacher can grade assignment
 
 As a Teacher  
 I can grade my students' assignments  
-So that they can know their knowledge level  
+So that they can know their knowlede level  
 
 @wip
 Scenario: Teacher can grade assignment  
@@ -351,8 +351,8 @@ Given /^I have a student$/ do
  @assignment = Assignment.new  
 end
 
-Given /^They have submitted an assignment$/ do  
-  @teacher.submit_assigment(@student, @assignment)  
+And /^They submitted an assignment$/ do 
+  @teacher.submit_assignment(@student, @assignment)  
 end
 
 When /^I grade the assignment$/ do  
