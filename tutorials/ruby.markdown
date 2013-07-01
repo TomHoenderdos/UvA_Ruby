@@ -351,8 +351,8 @@ Given /^I have a student$/ do
  @assignment = Assignment.new  
 end
 
-Given /^They have submitted an assignment$/ do  
-  @teacher.submit_assigment(@student, @assignment)  
+And /^They have submitted an assignment$/ do  
+  @teacher.submit_assignment(@student, @assignment)  
 end
 
 When /^I grade the assignment$/ do  
