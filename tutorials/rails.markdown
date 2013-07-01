@@ -85,7 +85,7 @@ attendees table. To the application.html.erb under ```<body>``` add:
 ```
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container"><a class="brand" href=“/”>The mapp</a><ul class="nav">
+        <div class="container"><a class="brand" href="/">The mapp</a><ul class="nav">
               <li class="active"><a href="/attendees">attendees</a></li>
             </ul>
         </div>
@@ -97,7 +97,7 @@ before ```</body>``` add:
 
 ```
 <footer>
-    <div class=“container”>5 talen in 5 dagen</div>
+    <div class="container">5 talen in 5 dagen</div>
 </footer>
 ```
 
